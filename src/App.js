@@ -38,7 +38,7 @@ function App() {
       <Layout>
         <Resizer sides={['right', 'bottom']}>
           {({ ref, sideElements }) => (
-            <Sidebar ref={ref}>
+            <Sidebar className="cy-sidebar" ref={ref}>
               {sideElements}
               Sidebar
             </Sidebar>
