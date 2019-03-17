@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import debounce from 'lodash/debounce'
 
 const isSideHorizontal = (side) => side === 'right' || side === 'left'
 
@@ -22,6 +23,10 @@ class Resizer extends React.Component {
     activeSide: '',
     initialHeight: 0,
     initialWidth: 0
+  }
+
+  debounceHandleMouseMove = (event) => {
+    debounce(() => this.handleMouseMove(event), 100)()
   }
 
   handleMouseMove = (event) => {
@@ -49,8 +54,7 @@ class Resizer extends React.Component {
 
   handleMouseUp = () => {
     this.setState({ activeSide: '' })
-    console.log('up')
-    document.removeEventListener('mousemove', this.handleMouseMove)
+    document.removeEventListener('mousemove', this.debounceHandleMouseMove)
   }
 
   componentDidMount() {
@@ -66,8 +70,7 @@ class Resizer extends React.Component {
     const sideElements = this.props.sides.map((side) => {
       const handleMouseDown = () => {
         this.setState({ activeSide: side })
-        console.log('down')
-        document.addEventListener('mousemove', this.handleMouseMove)
+        document.addEventListener('mousemove', this.debounceHandleMouseMove)
       }
       return <Side side={side} onMouseDown={handleMouseDown} key={side} />
     })
