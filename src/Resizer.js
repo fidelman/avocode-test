@@ -49,7 +49,6 @@ class Resizer extends React.Component {
 
   handleMouseUp = () => {
     this.setState({ activeSide: '' })
-    console.log('up')
     document.removeEventListener('mousemove', this.handleMouseMove)
   }
 
@@ -66,7 +65,6 @@ class Resizer extends React.Component {
     const sideElements = this.props.sides.map((side) => {
       const handleMouseDown = () => {
         this.setState({ activeSide: side })
-        console.log('down')
         document.addEventListener('mousemove', this.handleMouseMove)
       }
       return <Side side={side} onMouseDown={handleMouseDown} key={side} />
