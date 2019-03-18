@@ -28,6 +28,7 @@ const Sidebar = styled(Block)`
 
 const Content = styled(Block)`
   background-color: papayawhip;
+  flex-grow: 1;
 `
 
 function App() {
